@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verizon $ Commission + Elevate Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .tail-container { max-width: 1280px; margin: 0 auto; }
+        .dollar { color: #10b981; font-weight: 600; }
+        .category-btn { transition: all 0.2s; }
+        .category-btn.active { background-color: #27272a; color: white; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen">
+    <div class="tail-container p-6">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8 border-b border-zinc-800 pb-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center text-white font-bold text-3xl">V</div>
+                <div>
+                    <h1 class="text-4xl font-bold tracking-tight">COMMISSION $ CALCULATOR</h1>
+                    <p class="text-zinc-400">Level 3 • Feb 14 2026 • $10 per VAP • Live $ totals</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <div id="grand-total" class="text-5xl font-bold text-emerald-400">$0</div>
+                <div class="text-xs text-zinc-500">ESTIMATED COMMISSION</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6">
+            <!-- Sidebar Categories -->
+            <div class="col-span-2 bg-zinc-900 rounded-3xl p-4 h-fit sticky top-6 overflow-y-auto max-h-screen">
+                <div class="font-semibold text-zinc-400 text-sm mb-3 px-3">CATEGORIES</div>
+                
+                <div onclick="switchCategory(0)" class="category-btn active flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer mb-1">
+                    <i class="fa-solid fa-mobile-screen-button w-5"></i> <span>Priority Phones</span>
+                </div>
+                <div onclick="switchCategory(1)" class="category-btn flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer mb-1">
+                    <i class="fa-solid fa-fire w-5 text-orange-500"></i> <span>Mega Fire Sale</span>
+                </div>
+                <div onclick="switchCategory(2)" class="category-btn flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer mb-1">
+                    <i class="fa-solid fa-tablet-screen-button w-5"></i> <span>Pullthru / Buyout</span>
+                </div>
+                <div onclick="switchCategory(3)" class="category-btn flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer mb-1">
+                    <i class="fa-solid fa-mobile-alt w-5"></i> <span>Additional Devices</span>
+                </div>
+                <div onclick="switchCategory(4)" class="category-btn flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer mb-1">
+                    <i class="fa-solid fa-arrow-up-from-bracket w-5"></i> <span>Upgrade Trade</span>
+                </div>
+                <div onclick="switchCategory(5)" class="category-btn flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer mb-1">
+                    <i class="fa-solid fa-plus w-5"></i> <span>New Act Trade</span>
+                </div>
+                <div onclick="switchCategory(6)" class="category-btn flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer mb-1">
+                    <i class="fa-solid fa-house w-5"></i> <span>Home Internet</span>
+                </div>
+                <div onclick="switchCategory(7)" class="category-btn flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer mb-1">
+                    <i class="fa-solid fa-gift w-5"></i> <span>Perks &amp; Protection</span>
+                </div>
+                <div onclick="switchCategory(8)" class="category-btn flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer">
+                    <i class="fa-solid fa-plus w-5"></i> <span>Custom Item</span>
+                </div>
+            </div>
+
+            <!-- Products Area -->
+            <div class="col-span-7">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 id="category-title" class="text-3xl font-semibold">Priority Phones</h2>
+                    <div class="text-sm text-zinc-400">Select scenario → qty → ADD • Everything shows in real $</div>
+                </div>
+
+                <div id="products-grid" class="grid grid-cols-2 gap-4"></div>
+
+                <!-- Custom Form -->
+                <div id="custom-form" class="hidden mt-8 bg-zinc-900 rounded-3xl p-6">
+                    <h3 class="font-semibold mb-4">Add Anything Missing</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input id="custom-name" type="text" placeholder="Item name (e.g. Galaxy S25 Ultra Fire Sale)" 
+                               class="bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 focus:outline-none focus:border-red-500">
+                        <input id="custom-vap" type="number" step="0.1" placeholder="VAP value (e.g. 14.1)" 
+                               class="bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 focus:outline-none focus:border-red-500">
+                    </div>
+                    <button onclick="addCustomItem()" 
+                            class="mt-4 w-full bg-red-600 hover:bg-red-700 transition py-4 rounded-2xl font-semibold">
+                        ADD TO CART
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cart Sidebar -->
+            <div class="col-span-3 bg-zinc-900 rounded-3xl p-6 h-fit sticky top-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-xl flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping"></i> YOUR CART
+                    </h3>
+                    <button onclick="clearCart()" class="text-red-400 hover:text-red-300 text-sm flex items-center gap-1">
+                        <i class="fa-solid fa-trash"></i> CLEAR
+                    </button>
+                </div>
+
+                <div id="cart-items" class="space-y-4 max-h-[60vh] overflow-auto pr-2"></div>
+
+                <div class="border-t border-zinc-700 mt-6 pt-6">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span class="text-zinc-400">Total VAPs</span>
+                        <span id="total-vaps" class="font-mono text-2xl font-bold text-emerald-400">0.0</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-zinc-400">Commission (@ $10/VAP)</span>
+                        <span id="total-commission" class="text-4xl font-bold dollar">$0</span>
+                    </div>
+
+                    <!-- Elevate -->
+                    <div class="bg-zinc-950 rounded-2xl p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fa-solid fa-chart-line text-amber-400"></i>
+                            <span class="font-semibold">EST. ELEVATE LEVEL</span>
+                        </div>
+                        <div id="elevate-display" class="text-center py-4 bg-zinc-900 rounded-2xl">
+                            <div id="elevate-level" class="text-5xl font-bold text-amber-400">LEVEL 1</div>
+                            <div id="elevate-bonus" class="text-emerald-400 text-sm">+0% monthly bonus</div>
+                        </div>
+                        <div class="text-[10px] text-zinc-500 text-center mt-3">
+                            Level 5 = 2600+ VAPs ≈ $26,000+ tracked
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const allProducts = [
+            // 0 Priority Phones
+            {cat:0, name:"DuraForce Pro 3", scenarios:[{n:"Premium UPG",v:11.1},{n:"Premium AAL",v:19.3},{n:"Premium NAL",v:20.5},{n:"Welcome AAL",v:13.0},{n:"Welcome NAL",v:14.2}]},
+            {cat:0, name:"Pixel 10 128GB", scenarios:[{n:"Premium UPG",v:10.6},{n:"Premium AAL",v:18.8},{n:"Premium NAL",v:20.0},{n:"Welcome AAL",v:12.5},{n:"Welcome NAL",v:13.6}]},
+            {cat:0, name:"Pixel 7 128GB", scenarios:[{n:"Premium UPG",v:10.1},{n:"Premium AAL",v:18.3},{n:"Premium NAL",v:19.5},{n:"Welcome AAL",v:12.0},{n:"Welcome NAL",v:13.2}]},
+            {cat:0, name:"Pixel 10 Pro XL", scenarios:[{n:"Premium UPG",v:8.1},{n:"Premium AAL",v:16.3},{n:"Premium NAL",v:17.5},{n:"Welcome AAL",v:10.0},{n:"Welcome NAL",v:11.2}]},
+            {cat:0, name:"Moto Edge 2025", scenarios:[{n:"Premium UPG",v:6.0},{n:"Premium AAL",v:14.2},{n:"Premium NAL",v:15.3},{n:"Welcome AAL",v:7.9},{n:"Welcome NAL",v:9.0}]},
+            {cat:0, name:"Galaxy S25", scenarios:[{n:"Premium UPG",v:5.5},{n:"Premium AAL",v:13.7},{n:"Premium NAL",v:14.8},{n:"Welcome AAL",v:7.4},{n:"Welcome NAL",v:8.5}]},
+            {cat:0, name:"Moto Razr", scenarios:[{n:"Premium UPG",v:5.4},{n:"Premium AAL",v:13.6},{n:"Premium NAL",v:14.8},{n:"Welcome AAL",v:7.3},{n:"Welcome NAL",v:8.5}]},
+            {cat:0, name:"Galaxy S25+", scenarios:[{n:"Premium UPG",v:5.1},{n:"Premium AAL",v:13.3},{n:"Premium NAL",v:14.4},{n:"Welcome AAL",v:7.0},{n:"Welcome NAL",v:8.1}]},
+
+            // 1 Mega Fire Sale
+            {cat:1, name:"Pixel 9 / 9 Pro / 9 Pro XL Fire Sale", scenarios:[{n:"Fire Sale",v:14.0}]},
+            {cat:1, name:"Pixel 8 Series Fire Sale", scenarios:[{n:"Fire Sale",v:17.6}]},
+            {cat:1, name:"Galaxy Z Flip5 Fire Sale", scenarios:[{n:"Fire Sale",v:20.6}]},
+            {cat:1, name:"Galaxy Z Flip5 Max Fire Sale", scenarios:[{n:"Fire Sale",v:20.5}]},
+
+            // 2 Pullthru / Buyout
+            {cat:2, name:"TCL Tab 8 Plus Pullthru", scenarios:[{n:"Pullthru",v:9.4}]},
+            {cat:2, name:"TCL Tab 10 NXTPAPER Pullthru", scenarios:[{n:"Pullthru",v:7.0}]},
+            {cat:2, name:"TCL LinkZone 5G Pullthru", scenarios:[{n:"Pullthru",v:7.5}]},
+            {cat:2, name:"Gizmo Watch 3", scenarios:[{n:"With Phone",v:2.7}]},
+            {cat:2, name:"Pixel Watch 3 41/45mm", scenarios:[{n:"With Phone",v:6.0}]},
+
+            // 3 Additional Devices
+            {cat:3, name:"Pixel 10 Pro", scenarios:[{n:"Premium UPG",v:4.6}]},
+            {cat:3, name:"Pixel 10 Pro Fold", scenarios:[{n:"Premium UPG",v:4.6}]},
+            {cat:3, name:"Galaxy Flip7", scenarios:[{n:"Premium UPG",v:6.0}]},
+            {cat:3, name:"Galaxy Fold7", scenarios:[{n:"Premium UPG",v:4.6}]},
+            {cat:3, name:"Galaxy S25 Ultra", scenarios:[{n:"Premium UPG",v:4.6}]},
+            {cat:3, name:"Galaxy S25 Edge", scenarios:[{n:"Premium UPG",v:4.9}]},
+            {cat:3, name:"Galaxy S25 FE", scenarios:[{n:"Premium UPG",v:5.6}]},
+            {cat:3, name:"iPhone 17 / 16 Series", scenarios:[{n:"Premium UPG",v:2.8}]},
+
+            // 4 Upgrade Trade
+            {cat:4, name:"Pixel 10 UPG", scenarios:[{n:"Ultimate/Plus T1",v:10.6},{n:"Welcome",v:9.5}]},
+            {cat:4, name:"Pixel 10 Pro UPG", scenarios:[{n:"Ultimate T1",v:4.6}]},
+            {cat:4, name:"Moto Edge 2025 UPG", scenarios:[{n:"Most Plans",v:6.0}]},
+            {cat:4, name:"Galaxy S25 Ultra UPG", scenarios:[{n:"Most Plans",v:4.6}]},
+            {cat:4, name:"iPhone 17 Pro Max UPG", scenarios:[{n:"Most Plans",v:2.8}]},
+
+            // 5 New Act Trade
+            {cat:5, name:"Pixel 10 NAL Premium", scenarios:[{n:"Premium NAL",v:20.0},{n:"Premium AAL",v:18.8}]},
+            {cat:5, name:"Pixel 10 Pro NAL", scenarios:[{n:"Premium NAL",v:13.9}]},
+            {cat:5, name:"iPhone 17 Series NAL", scenarios:[{n:"Premium AAL/NAL",v:9.2},{n:"Welcome",v:4.0}]},
+
+            // 6 HOME INTERNET
+            {cat:6, name:"Verizon 5G Home Ultimate", scenarios:[{n:"w/ $10 AP + $15 M+H",v:16.0}]},
+            {cat:6, name:"Verizon 5G Home Plus", scenarios:[{n:"w/ $10 AP + $15 M+H",v:13.3}]},
+            {cat:6, name:"Verizon 5G Home", scenarios:[{n:"w/ $10 AP + $15 M+H",v:12.1}]},
+            {cat:6, name:"Verizon 5G Home Lite", scenarios:[{n:"w/ $10 AP + $15 M+H",v:6.0}]},
+            {cat:6, name:"Verizon WiFi Backup", scenarios:[{n:"Any Plan",v:3.5}]},
+            {cat:6, name:"Frontier Fiber 7GB", scenarios:[{n:"w/ $10 AP + $15 M+H",v:27.5}]},
+            {cat:6, name:"Frontier Fiber 5GB", scenarios:[{n:"w/ $10 AP + $15 M+H",v:25.0}]},
+            {cat:6, name:"Frontier Fiber 2GB", scenarios:[{n:"w/ $10 AP + $15 M+H",v:22.5}]},
+            {cat:6, name:"Frontier Fiber 1GB", scenarios:[{n:"w/ $10 AP + $15 M+H",v:19.5}]},
+            {cat:6, name:"YouTube TV Add-on", scenarios:[{n:"New Subscriber",v:7.0}]},
+
+            // 7 PERKS & PROTECTION
+            {cat:7, name:"Verizon Mobile Protect", scenarios:[{n:"Any Tier",v:2.6}]},
+            {cat:7, name:"YouTube Premium Perk", scenarios:[{n:"Added",v:1.1}]},
+            {cat:7, name:"Second Number Perk", scenarios:[{n:"Added",v:1.7}]},
+            {cat:7, name:"100GB Mobile Hotspot Perk", scenarios:[{n:"Added",v:0.6}]},
+            {cat:7, name:"Netflix + Pro WiFi Bundle", scenarios:[{n:"Added",v:0.7}]},
+            {cat:7, name:"Unlimited Cloud Perk", scenarios:[{n:"Added",v:1.0}]},
+            {cat:7, name:"Digital Voice (Home)", scenarios:[{n:"Added",v:1.5}]}
+        ];
+
+        let cart = [];
+        let currentCategory = 0;
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            if (currentCategory === 8) {
+                document.getElementById('custom-form').classList.remove('hidden');
+                grid.innerHTML = `<div class="col-span-2 text-center py-12 text-zinc-500">Use the form below for any missing item</div>`;
+                return;
+            }
+            document.getElementById('custom-form').classList.add('hidden');
+
+            const filtered = allProducts.filter(p => p.cat === currentCategory);
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'bg-zinc-900 rounded-3xl p-5 hover:ring-2 hover:ring-red-500/30 transition group';
+                
+                let opts = p.scenarios.map((s,i) => 
+                    `<option value="${i}">${s.n} — $${(s.v*10).toFixed(0)}</option>`
+                ).join('');
+                
+                card.innerHTML = `
+                    <div class="font-semibold text-lg mb-3">${p.name}</div>
+                    <select id="sc-${p.name.replace(/ /g,'_')}" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-red-600">
+                        ${opts}
+                    </select>
+                    <div class="flex gap-3 mt-4">
+                        <input id="qty-${p.name.replace(/ /g,'_')}" type="number" value="1" min="1" 
+                               class="w-20 bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 text-center focus:outline-none focus:border-red-600">
+                        <button onclick="addItem('${p.name}')" 
+                                class="flex-1 bg-red-600 hover:bg-red-700 transition font-semibold rounded-2xl">
+                            ADD
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function addItem(name) {
+            const prod = allProducts.find(p => p.name === name);
+            const cleanName = name.replace(/ /g,'_');
+            const select = document.getElementById(`sc-${cleanName}`);
+            const qtyInput = document.getElementById(`qty-${cleanName}`);
+            
+            const idx = parseInt(select.value);
+            const qty = parseInt(qtyInput.value) || 1;
+            const scen = prod.scenarios[idx];
+
+            cart.push({
+                id: Date.now(),
+                name: name,
+                scen: scen.n,
+                vap: scen.v,
+                qty: qty,
+                dollars: scen.v * 10 * qty
+            });
+            renderCart();
+        }
+
+        function addCustomItem() {
+            const name = document.getElementById('custom-name').value.trim();
+            const vap = parseFloat(document.getElementById('custom-vap').value);
+            if (!name || isNaN(vap)) return alert("Please enter both name and VAP value");
+            
+            cart.push({
+                id: Date.now(),
+                name: name,
+                scen: "Custom",
+                vap: vap,
+                qty: 1,
+                dollars: vap * 10
+            });
+            document.getElementById('custom-name').value = '';
+            document.getElementById('custom-vap').value = '';
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+            let totalVaps = 0;
+            let totalDollars = 0;
+
+            cart.forEach((item, index) => {
+                const subtVap = item.vap * item.qty;
+                totalVaps += subtVap;
+                totalDollars += subtVap * 10;
+
+                const div = document.createElement('div');
+                div.className = 'cart-item bg-zinc-950 rounded-2xl p-4 flex justify-between items-start';
+                div.innerHTML = `
+                    <div>
+                        <div class="font-medium">${item.name}</div>
+                        <div class="text-xs text-zinc-400">${item.scen} × ${item.qty}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="dollar text-xl">$${(subtVap * 10).toFixed(0)}</div>
+                        <button onclick="removeItem(${index})" class="text-red-400 hover:text-red-300 text-xs mt-1">REMOVE</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-zinc-500">Cart is empty — start adding!</div>`;
+            }
+
+            document.getElementById('total-vaps').textContent = totalVaps.toFixed(1);
+            document.getElementById('total-commission').textContent = '$' + totalDollars.toFixed(0);
+            document.getElementById('grand-total').textContent = '$' + totalDollars.toFixed(0);
+
+            // Elevate Level
+            let level = 1;
+            let bonus = 0;
+            if (totalVaps >= 2600) { level = 5; bonus = 30; }
+            else if (totalVaps >= 2275) { level = 4; bonus = 22.5; }
+            else if (totalVaps >= 1850) { level = 3; bonus = 15; }
+            else if (totalVaps >= 1200) { level = 2; bonus = 7.5; }
+
+            document.getElementById('elevate-level').textContent = `LEVEL ${level}`;
+            document.getElementById('elevate-bonus').textContent = `+${bonus}% monthly bonus`;
+            
+            const elevateBox = document.getElementById('elevate-display');
+            elevateBox.className = level >= 5 ? 'text-center py-4 bg-gradient-to-br from-amber-900 to-yellow-900 rounded-2xl' :
+                                  level >= 3 ? 'text-center py-4 bg-emerald-900/40 rounded-2xl' :
+                                  'text-center py-4 bg-zinc-900 rounded-2xl';
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        function clearCart() {
+            if (confirm("Clear the entire cart?")) {
+                cart = [];
+                renderCart();
+            }
+        }
+
+        function switchCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === cat);
+            });
+            
+            const titles = [
+                "Priority Phones", "Mega Fire Sale", "Pullthru / Buyout", 
+                "Additional Devices", "Upgrade Trade", "New Act Trade",
+                "Home Internet", "Perks & Protection", "Custom Item"
+            ];
+            document.getElementById('category-title').textContent = titles[cat];
+            
+            renderProducts();
+        }
+
+        window.onload = () => {
+            renderProducts();
+            renderCart();
+        };
+    </script>
+</body>
+</html>
