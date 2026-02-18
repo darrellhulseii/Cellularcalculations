@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verizon Commission $ + Elevate Tracker • Level 3</title>
+    <title>Verizon Commission $ + Elevate Tracker • Level 3 (Full Guide)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -29,7 +29,7 @@
                 <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center text-white font-bold text-3xl">V</div>
                 <div>
                     <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">COMMISSION $ CALCULATOR</h1>
-                    <p class="text-zinc-400 text-sm sm:text-base">Level 3 • Feb 2026 • $10 per VAP</p>
+                    <p class="text-zinc-400 text-sm sm:text-base">Level 3 • Feb 14 2026 • $10 per VAP • Full 13-page guide</p>
                 </div>
             </div>
             <div class="text-right w-full sm:w-auto">
@@ -67,7 +67,7 @@
                     <i class="fa-solid fa-gift w-5"></i> <span>Perks & Protection</span>
                 </div>
                 <div onclick="switchCategory(8)" class="category-btn flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-zinc-800 cursor-pointer">
-                    <i class="fa-solid fa-plus w-5"></i> <span>Custom Item</span>
+                    <i class="fa-solid fa-plus w-5"></i> <span>Custom / Prepaid</span>
                 </div>
             </div>
 
@@ -75,18 +75,18 @@
             <div class="col-span-12 sm:col-span-7">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
                     <h2 id="category-title" class="text-2xl sm:text-3xl font-semibold">Priority Phones</h2>
-                    <div class="text-sm text-zinc-400">Select scenario → qty → ADD</div>
+                    <div class="text-sm text-zinc-400">Select → qty → ADD • Dollars shown</div>
                 </div>
 
                 <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
 
                 <!-- Custom Form -->
                 <div id="custom-form" class="hidden mt-8 bg-zinc-900 rounded-3xl p-6">
-                    <h3 class="font-semibold mb-4">Add Custom / Missing Item</h3>
+                    <h3 class="font-semibold mb-4">Add Custom / Missing / Prepaid Item</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <input id="custom-name" type="text" placeholder="e.g. Galaxy S25 Ultra Fire Sale UPG" 
+                        <input id="custom-name" type="text" placeholder="e.g. Moto G Play New Act" 
                                class="bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 focus:outline-none focus:border-red-500">
-                        <input id="custom-vap" type="number" step="0.1" placeholder="VAP value (e.g. 14.1)" 
+                        <input id="custom-vap" type="number" step="0.1" placeholder="VAP value (e.g. 6.7)" 
                                class="bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 focus:outline-none focus:border-red-500">
                     </div>
                     <button onclick="addCustomItem()" 
@@ -140,30 +140,32 @@
 
     <script>
         const allProducts = [
-            // 0 - Priority Phones
+            // 0 - Priority Phones (HIGH + Additional Priority)
             {cat:0, name:"DuraForce Pro 3", scenarios:[{n:"Premium UPG",v:11.1},{n:"Premium AAL",v:19.3},{n:"Premium NAL",v:20.5},{n:"Welcome AAL",v:13.0},{n:"Welcome NAL",v:14.2}]},
             {cat:0, name:"Pixel 10 128GB", scenarios:[{n:"Premium UPG",v:10.6},{n:"Premium AAL",v:18.8},{n:"Premium NAL",v:20.0},{n:"Welcome AAL",v:12.5},{n:"Welcome NAL",v:13.6}]},
             {cat:0, name:"Pixel 7 128GB", scenarios:[{n:"Premium UPG",v:10.1},{n:"Premium AAL",v:18.3},{n:"Premium NAL",v:19.5},{n:"Welcome AAL",v:12.0},{n:"Welcome NAL",v:13.2}]},
             {cat:0, name:"Pixel 10 Pro XL", scenarios:[{n:"Premium UPG",v:8.1},{n:"Premium AAL",v:16.3},{n:"Premium NAL",v:17.5},{n:"Welcome AAL",v:10.0},{n:"Welcome NAL",v:11.2}]},
             {cat:0, name:"Moto Edge 2025", scenarios:[{n:"Premium UPG",v:6.0},{n:"Premium AAL",v:14.2},{n:"Premium NAL",v:15.3},{n:"Welcome AAL",v:7.9},{n:"Welcome NAL",v:9.0}]},
-            {cat:0, name:"Galaxy S25", scenarios:[{n:"Premium UPG",v:5.5},{n:"Premium AAL",v:13.7},{n:"Premium NAL",v:14.8},{n:"Welcome AAL",v:7.4},{n:"Welcome NAL",v:8.5}]},
+            {cat:0, name:"Galaxy S25 256GB", scenarios:[{n:"Premium UPG",v:5.5},{n:"Premium AAL",v:13.7},{n:"Premium NAL",v:14.8},{n:"Welcome AAL",v:7.4},{n:"Welcome NAL",v:8.5}]},
             {cat:0, name:"Moto Razr", scenarios:[{n:"Premium UPG",v:5.4},{n:"Premium AAL",v:13.6},{n:"Premium NAL",v:14.8},{n:"Welcome AAL",v:7.3},{n:"Welcome NAL",v:8.5}]},
-            {cat:0, name:"Galaxy S25+", scenarios:[{n:"Premium UPG",v:5.1},{n:"Premium AAL",v:13.3},{n:"Premium NAL",v:14.4},{n:"Welcome AAL",v:7.0},{n:"Welcome NAL",v:8.1}]},
+            {cat:0, name:"Galaxy S25+ 256GB", scenarios:[{n:"Premium UPG",v:5.1},{n:"Premium AAL",v:13.3},{n:"Premium NAL",v:14.4},{n:"Welcome AAL",v:7.0},{n:"Welcome NAL",v:8.1}]},
 
             // 1 - Mega Fire Sale
             {cat:1, name:"Pixel 9 / 9 Pro / 9 Pro XL Fire Sale", scenarios:[{n:"Fire Sale",v:14.0}]},
-            {cat:1, name:"Pixel 8 Series Fire Sale", scenarios:[{n:"Fire Sale",v:17.6}]},
+            {cat:1, name:"Pixel 8 / 8 Pro Fire Sale", scenarios:[{n:"Fire Sale",v:17.6}]},
             {cat:1, name:"Galaxy Z Flip5 Fire Sale", scenarios:[{n:"Fire Sale",v:20.6}]},
             {cat:1, name:"Galaxy Z Flip5 Max Fire Sale", scenarios:[{n:"Fire Sale",v:20.5}]},
+            {cat:1, name:"Galaxy S24 FE Fire Sale", scenarios:[{n:"Fire Sale",v:5.4}]},
+            {cat:1, name:"iPhone 15 Pro Max Fire Sale", scenarios:[{n:"Fire Sale",v:6.5}]},
 
-            // 2 - Pullthru / Buyout
+            // 2 - Pullthru / Buyout / Gizmo / Watches
             {cat:2, name:"TCL Tab 8 Plus Pullthru", scenarios:[{n:"Pullthru",v:9.4}]},
-            {cat:2, name:"TCL Tab 10 NXTPAPER Pullthru", scenarios:[{n:"Pullthru",v:7.0}]},
             {cat:2, name:"TCL LinkZone 5G Pullthru", scenarios:[{n:"Pullthru",v:7.5}]},
+            {cat:2, name:"TCL Tab 10 NXTPAPER Pullthru", scenarios:[{n:"Pullthru",v:7.0}]},
             {cat:2, name:"Gizmo Watch 3", scenarios:[{n:"With Phone",v:2.7}]},
             {cat:2, name:"Pixel Watch 3 41/45mm", scenarios:[{n:"With Phone",v:6.0}]},
 
-            // 3 - Additional Devices
+            // 3 - Additional Devices + While Supplies Last + Basic Phones
             {cat:3, name:"Pixel 10 Pro", scenarios:[{n:"Premium UPG",v:4.6}]},
             {cat:3, name:"Pixel 10 Pro Fold", scenarios:[{n:"Premium UPG",v:4.6}]},
             {cat:3, name:"Galaxy Flip7", scenarios:[{n:"Premium UPG",v:6.0}]},
@@ -171,32 +173,33 @@
             {cat:3, name:"Galaxy S25 Ultra", scenarios:[{n:"Premium UPG",v:4.6}]},
             {cat:3, name:"Galaxy S25 Edge", scenarios:[{n:"Premium UPG",v:4.9}]},
             {cat:3, name:"Galaxy S25 FE", scenarios:[{n:"Premium UPG",v:5.6}]},
-            {cat:3, name:"iPhone 17 / 16 Series", scenarios:[{n:"Premium UPG",v:2.8}]},
+            {cat:3, name:"Galaxy A16", scenarios:[{n:"Premium UPG",v:6.5}]},
+            {cat:3, name:"iPhone 17 series", scenarios:[{n:"Premium UPG",v:2.8}]},
+            {cat:3, name:"iPhone 16 series", scenarios:[{n:"Premium UPG",v:2.8}]},
+            {cat:3, name:"Galaxy S24 (While Last)", scenarios:[{n:"Premium UPG",v:7.6}]},
+            {cat:3, name:"DuraSport (While Last)", scenarios:[{n:"Premium UPG",v:9.6}]},
+            {cat:3, name:"Orbic Journey V", scenarios:[{n:"UPG",v:3.7}]},
+            {cat:3, name:"TCL Flip 3 / Pro", scenarios:[{n:"UPG",v:3.2}]},
+            {cat:3, name:"Kyocera DuraXV Extreme+", scenarios:[{n:"UPG",v:2.7}]},
 
-            // 4 - Upgrade Trade
-            {cat:4, name:"Pixel 10 UPG", scenarios:[{n:"Ultimate/Plus T1",v:10.6},{n:"Welcome",v:9.5}]},
+            // 4 - Upgrade Trade (selected high VAP lines)
+            {cat:4, name:"Pixel 10 UPG", scenarios:[{n:"Ultimate/Plus T1",v:10.6},{n:"Welcome UPG",v:9.5}]},
             {cat:4, name:"Pixel 10 Pro UPG", scenarios:[{n:"Ultimate T1",v:4.6}]},
             {cat:4, name:"Moto Edge 2025 UPG", scenarios:[{n:"Most Plans",v:6.0}]},
             {cat:4, name:"Galaxy S25 Ultra UPG", scenarios:[{n:"Most Plans",v:4.6}]},
             {cat:4, name:"iPhone 17 Pro Max UPG", scenarios:[{n:"Most Plans",v:2.8}]},
 
-            // 5 - New Act Trade
+            // 5 - New Act Trade (selected high VAP lines)
             {cat:5, name:"Pixel 10 NAL Premium", scenarios:[{n:"Premium NAL",v:20.0},{n:"Premium AAL",v:18.8}]},
             {cat:5, name:"Pixel 10 Pro NAL", scenarios:[{n:"Premium NAL",v:13.9}]},
-            {cat:5, name:"iPhone 17 Series NAL", scenarios:[{n:"Premium AAL/NAL",v:9.2},{n:"Welcome",v:4.0}]},
+            {cat:5, name:"iPhone 17 series NAL", scenarios:[{n:"Premium AAL/NAL",v:9.2},{n:"Welcome AAL/NAL",v:4.0}]},
 
-            // 6 - Home Internet
+            // 6 - Home Internet (from previous - kept as is)
             {cat:6, name:"5G Home Ultimate", scenarios:[{n:"w/ $10 AP & $15 M+H",v:16.0}]},
             {cat:6, name:"5G Home Plus", scenarios:[{n:"w/ $10 AP & $15 M+H",v:13.3}]},
             {cat:6, name:"5G Home", scenarios:[{n:"w/ $10 AP & $15 M+H",v:12.1}]},
-            {cat:6, name:"5G Home Lite", scenarios:[{n:"w/ $10 AP & $15 M+H",v:6.0}]},
-            {cat:6, name:"WiFi Backup", scenarios:[{n:"Any Plan",v:3.5}]},
             {cat:6, name:"Frontier Fiber 7GB", scenarios:[{n:"w/ $10 AP & $15 M+H",v:27.5}]},
             {cat:6, name:"Frontier Fiber 5GB", scenarios:[{n:"w/ $10 AP & $15 M+H",v:25.0}]},
-            {cat:6, name:"Frontier Fiber 2GB", scenarios:[{n:"w/ $10 AP & $15 M+H",v:22.5}]},
-            {cat:6, name:"Frontier Fiber 1GB", scenarios:[{n:"w/ $10 AP & $15 M+H",v:19.5}]},
-            {cat:6, name:"Frontier Fiber 500", scenarios:[{n:"w/ $10 AP & $15 M+H",v:16.5}]},
-            {cat:6, name:"YouTube TV Base", scenarios:[{n:"New Sub",v:7.0}]},
 
             // 7 - Perks & Protection
             {cat:7, name:"Verizon Mobile Protect", scenarios:[{n:"Any Tier",v:2.6}]},
@@ -204,6 +207,10 @@
             {cat:7, name:"Second Number Perk", scenarios:[{n:"Added",v:1.7}]},
             {cat:7, name:"100GB Hotspot Perk", scenarios:[{n:"Added",v:0.6}]},
             {cat:7, name:"Netflix + Pro WiFi Bundle", scenarios:[{n:"Added",v:0.7}]},
+
+            // 8 - Custom / Prepaid / Low Supply
+            // (use custom form for these, but pre-added a few obvious ones)
+            {cat:8, name:"Moto G Play / G 5G New Act", scenarios:[{n:"New Act PPD Min",v:6.7}]},
         ];
 
         let cart = [];
@@ -215,7 +222,7 @@
 
             if (currentCategory === 8) {
                 document.getElementById('custom-form').classList.remove('hidden');
-                grid.innerHTML = `<div class="text-center py-12 text-zinc-500">Use form below to add any item</div>`;
+                grid.innerHTML = `<div class="text-center py-12 text-zinc-500">Use the form below for Prepaid, Low Supply, or any missing item</div>`;
                 return;
             }
             document.getElementById('custom-form').classList.add('hidden');
@@ -232,11 +239,11 @@
                 
                 card.innerHTML = `
                     <div class="font-semibold text-lg mb-3">${p.name}</div>
-                    <select id="sc-${p.name.replace(/ /g,'_')}" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 text-sm">
+                    <select id="sc-${p.name.replace(/ /g,'_').replace(/[^a-zA-Z0-9]/g,'')}" class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 text-sm">
                         ${opts}
                     </select>
                     <div class="flex gap-3 mt-4">
-                        <input id="qty-${p.name.replace(/ /g,'_')}" type="number" value="1" min="1" class="w-20 bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 text-center">
+                        <input id="qty-${p.name.replace(/ /g,'_').replace(/[^a-zA-Z0-9]/g,'')}" type="number" value="1" min="1" class="w-20 bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 text-center">
                         <button onclick="addItem('${p.name}')" class="flex-1 bg-red-600 hover:bg-red-700 rounded-2xl font-semibold">ADD</button>
                     </div>
                 `;
@@ -246,7 +253,7 @@
 
         function addItem(name) {
             const prod = allProducts.find(p => p.name === name);
-            const clean = name.replace(/ /g,'_');
+            const clean = name.replace(/ /g,'_').replace(/[^a-zA-Z0-9]/g,'');
             const select = document.getElementById(`sc-${clean}`);
             const qtyEl = document.getElementById(`qty-${clean}`);
             const idx = parseInt(select.value);
@@ -259,7 +266,6 @@
                 scen: scen.n,
                 vap: scen.v,
                 qty,
-                dollars: scen.v * 10 * qty
             });
             renderCart();
         }
@@ -267,7 +273,7 @@
         function addCustomItem() {
             const name = document.getElementById('custom-name').value.trim();
             const vap = parseFloat(document.getElementById('custom-vap').value);
-            if (!name || isNaN(vap)) return alert("Enter name + VAP");
+            if (!name || isNaN(vap)) return alert("Enter name + VAP value");
             
             cart.push({
                 id: Date.now(),
@@ -275,7 +281,6 @@
                 scen: "Custom",
                 vap,
                 qty: 1,
-                dollars: vap * 10
             });
             document.getElementById('custom-name').value = '';
             document.getElementById('custom-vap').value = '';
@@ -285,61 +290,68 @@
         function renderCart() {
             const cont = document.getElementById('cart-items');
             cont.innerHTML = '';
-            let tv = 0, td = 0;
+            let totalVaps = 0;
 
-            cart.forEach((it, i) => {
-                const sv = it.vap * it.qty;
-                tv += sv;
-                td += sv * 10;
+            cart.forEach((item, index) => {
+                const subt = item.vap * item.qty;
+                totalVaps += subt;
 
-                const row = document.createElement('div');
-                row.className = 'bg-zinc-950 rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3';
-                row.innerHTML = `
+                const div = document.createElement('div');
+                div.className = 'bg-zinc-950 rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3';
+                div.innerHTML = `
                     <div class="flex-1">
-                        <div class="font-medium">${it.name}</div>
-                        <div class="text-xs text-zinc-400">${it.scen} × ${it.qty}</div>
+                        <div class="font-medium text-base">${item.name}</div>
+                        <div class="text-xs text-zinc-400">${item.scen} × ${item.qty}</div>
                     </div>
-                    <div class="text-right flex items-center gap-4">
-                        <div class="dollar text-lg sm:text-xl">$${(sv*10).toFixed(0)}</div>
-                        <button onclick="cart.splice(${i},1);renderCart()" class="text-red-400 hover:text-red-300">
+                    <div class="text-right flex items-center gap-4 sm:gap-6">
+                        <div class="dollar text-lg sm:text-xl whitespace-nowrap">$${(subt * 10).toFixed(0)}</div>
+                        <button onclick="cart.splice(${index},1);renderCart()" class="text-red-400 hover:text-red-300 text-sm">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </div>
                 `;
-                cont.appendChild(row);
+                cont.appendChild(div);
             });
 
-            if (!cart.length) cont.innerHTML = `<div class="text-center py-10 text-zinc-500">Cart empty</div>`;
+            if (cart.length === 0) {
+                cont.innerHTML = `<div class="text-center py-10 text-zinc-500 text-sm">Cart is empty — start adding!</div>`;
+            }
 
-            document.getElementById('total-vaps').textContent = tv.toFixed(1);
-            document.getElementById('total-commission').textContent = '$' + td.toFixed(0);
-            document.getElementById('grand-total').textContent = '$' + td.toFixed(0);
+            const commission = totalVaps * 10;
+            document.getElementById('total-vaps').textContent = totalVaps.toFixed(1);
+            document.getElementById('total-commission').textContent = '$' + commission.toFixed(0);
+            document.getElementById('grand-total').textContent = '$' + commission.toFixed(0);
 
-            let lvl = 1, bonus = 0;
-            if (tv >= 2600) {lvl=5; bonus=30;}
-            else if (tv >= 2275) {lvl=4; bonus=22.5;}
-            else if (tv >= 1850) {lvl=3; bonus=15;}
-            else if (tv >= 1200) {lvl=2; bonus=7.5;}
+            // Elevate
+            let level = 1, bonus = 0;
+            if (totalVaps >= 2600) { level = 5; bonus = 30; }
+            else if (totalVaps >= 2275) { level = 4; bonus = 22.5; }
+            else if (totalVaps >= 1850) { level = 3; bonus = 15; }
+            else if (totalVaps >= 1200) { level = 2; bonus = 7.5; }
 
-            document.getElementById('elevate-level').textContent = `LEVEL ${lvl}`;
+            document.getElementById('elevate-level').textContent = `LEVEL ${level}`;
             document.getElementById('elevate-bonus').textContent = `+${bonus}% monthly bonus`;
 
-            document.getElementById('elevate-display').className = 
-                lvl>=5 ? 'text-center py-5 bg-gradient-to-br from-amber-900 to-yellow-900 rounded-2xl' :
-                lvl>=3 ? 'text-center py-5 bg-emerald-900/40 rounded-2xl' : 
-                'text-center py-5 bg-zinc-900 rounded-2xl';
+            const box = document.getElementById('elevate-display');
+            box.className = level >= 5 ? 'text-center py-5 bg-gradient-to-br from-amber-900 to-yellow-900 rounded-2xl' :
+                            level >= 3 ? 'text-center py-5 bg-emerald-900/40 rounded-2xl' :
+                            'text-center py-5 bg-zinc-900 rounded-2xl';
         }
 
         function clearCart() {
-            if (confirm("Clear cart?")) { cart = []; renderCart(); }
+            if (confirm("Clear entire cart?")) { cart = []; renderCart(); }
         }
 
         function switchCategory(cat) {
             currentCategory = cat;
-            document.querySelectorAll('.category-btn').forEach((b,i) => {
-                b.classList.toggle('active', i === cat);
+            document.querySelectorAll('.category-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === cat);
             });
-            const titles = ["Priority Phones","Mega Fire Sale","Pullthru / Buyout","Additional Devices","Upgrade Trade","New Act Trade","Home Internet","Perks & Protection","Custom Item"];
+            const titles = [
+                "Priority Phones", "Mega Fire Sale", "Pullthru / Buyout", 
+                "Additional Devices", "Upgrade Trade", "New Act Trade",
+                "Home Internet", "Perks & Protection", "Custom / Prepaid"
+            ];
             document.getElementById('category-title').textContent = titles[cat];
             renderProducts();
         }
